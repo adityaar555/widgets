@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonial Slider</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+
+  .testimonial-slider {
+    position: relative;
+    max-width: 600px;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 100px;
+  }
+
+  .testimonial {
+    display: none;
+  }
+
+  .testimonial-text {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .client-info {
+    font-style: italic;
+  }
+
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    z-index: 1;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .prev-btn:hover,
+  .next-btn:hover {
+    background-color: #555;
+  }
+
+  .prev-btn {
+    left: 20px;
+  }
+
+  .next-btn {
+    right: 20px;
+  }
+
+  .prev-btn::before,
+  .next-btn::before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 14px;
+  }
+
+  .prev-btn::before {
+    content: '\f104';
+  }
+
+  .next-btn::before {
+    content: '\f105';
+  }
+
+  .company-logo {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .company-logo img {
+    max-width: 100px;
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-zmcw7G0sPV4Fq8btaJvZrb7MzG5+CmkMUpnn4a+nB0jr5pM0jwJ8Lw+L4bZh0wiH" crossorigin="anonymous">
+</head>
+<body>
+<div class="testimonial-slider">
+  <div class="testimonial">
+    <p class="testimonial-text">Absolutely phenomenal service! I've never experienced such professionalism and attention to detail before. Highly recommended!</p>
+    <p class="client-info">- John Smith, CEO, Tech Innovations Inc.</p>
+  </div>
+  <!-- Add other testimonials here -->
+  <button class="prev-btn" onclick="changeTestimonial(-1)">&#10094;</button>
+  <button class="next-btn" onclick="changeTestimonial(1)">&#10095;</button>
+  <div class="company-logo">
+    <img src="logo1.png" alt="Company Logo">
+  </div>
+</div>
+<script>
+  let slideIndex = 0;
+  const testimonials = document.getElementsByClassName('testimonial');
+  const logos = ['logo1.png', 'logo2.png', 'logo3.png', 'logo4.png', 'logo5.png']; // Array of logo file paths
+
+  function showTestimonial() {
+    for (let i = 0; i < testimonials.length; i++) {
+      testimonials[i].style.display = 'none';
+    }
+    if (slideIndex >= testimonials.length) {
+      slideIndex = 0;
+    }
+    if (slideIndex < 0) {
+      slideIndex = testimonials.length - 1;
+    }
+    testimonials[slideIndex].style.display = 'block';
+
+    // Change company logo based on slideIndex
+    const companyLogo = document.querySelector('.company-logo img');
+    companyLogo.src = logos[slideIndex];
+  }
+
+  function changeTestimonial(n) {
+    slideIndex += n;
+    showTestimonial();
+  }
+
+  showTestimonial();
+  setInterval(() => {
+    slideIndex++;
+    showTestimonial();
+  }, 5000); // Change testimonial every 5 seconds
+</script>
+</body>
+</html>
